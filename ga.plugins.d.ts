@@ -235,6 +235,11 @@ interface TiledWorld extends Group {
     heightInTiles:number;
 }
 
+type BaseObject = { readonly x:number, readonly y:number, readonly centerX:number, readonly centerY:number};
+type Follower = BaseObject
+type Leader   = BaseObject;
+
+
 export interface Engine {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -284,7 +289,7 @@ distance( s1:DisplayableObject, s2:DisplayableObject):number;
  * @param leader
  * @param speed The easing value, such as 0.3. A higher number makes the follower move faster
  */
-followEase(follower:DisplayableObject, leader:DisplayableObject, speed:number):void;
+followEase(follower:Follower, leader:Leader, speed:number):void;
 
 /**
  * Make a sprite move towards another sprite at a regular speed.

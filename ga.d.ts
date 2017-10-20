@@ -20,7 +20,7 @@ export interface KeyHandler {
 /**
  *
  */
-export interface DisplayableObject {
+export interface DisplayableObject  {
     x:number;
     y:number;
 
@@ -101,24 +101,8 @@ export interface Group extends DisplayableObject {
 
 }
 
-/**
- *
- */
-export interface Sprite extends DisplayableObject {
-    fps:number;
-
-    loop:boolean;
-    playing:boolean;
-
-    show(frameNumber:number):void;
-    playSequence(sequenceArray:Array<number>):void;
-    play():void;
-    stop():void;
-
-
-}
-
-export interface InteractiveSprite extends Sprite  {
+interface InteractiveFeature  {
+  interactive:boolean;
 
   /**
    * The `press` and `release` methods. They're `undefined`
@@ -161,6 +145,29 @@ export interface InteractiveSprite extends Sprite  {
 
 }
 
+/**
+ *
+ */
+export interface Sprite extends InteractiveFeature,DisplayableObject {
+
+    circular:boolean;
+    radius:number;
+    diameter:number;
+
+    fps:number;
+
+    loop:boolean;
+    playing:boolean;
+
+    show(frameNumber:number):void;
+    playSequence(sequenceArray:Array<number>):void;
+    play():void;
+    stop():void;
+
+
+}
+
+
 export interface Line extends DisplayableObject {
     ax:number;
     ay:number;
@@ -194,7 +201,9 @@ export interface Rectangle extends DisplayableObject {
     //rotate:number;
 }
 
-export interface Circle extends DisplayableObject {
+export interface Circle extends Sprite {
+    fillStyle:string;
+    strokeStyle:string;
     diameter:number;
     radius:number;
 }
@@ -226,6 +235,11 @@ interface Pointer {
 
 
 }
+
+interface Frame extends Bounds {
+  image:string;
+}
+
 /**
  *
  */
@@ -332,6 +346,15 @@ export interface Engine {
     remove<T extends DisplayableObject>(spritesToRemove:T|T[]):void;
 
     /**
+     * The `frame` method returns and object that defines
+     * in the position and size of a sub-image in a tileset. Use it if you
+     * want to create a sprite from a sub-image inside an Image object.
+     * arguments: sourceString, xPostionOfSubImage, yPositionOfSubImage,
+     * widthOfSubImage, heightOfSubImage.
+     */
+    frame(source:string, x:number, y:number, width:number, height:number):Frame;
+
+    /**
      *
      */
     rectangle<T extends Rectangle>( widthPx:number, heightPx:number, fillColor:string, strokeColor?:string, lineWidth?:number, x?:number, y?:number ):T;
@@ -346,7 +369,7 @@ export interface Engine {
      * arguments: lineColor, lineWidth, startX, startY, endX, endY.
      *
      */
-    line(strokeStyle?:string, lineWidth?:number, x?:number, y?:number, endX?:number, endY?:number):Line;
+    line<T extends Line>(strokeStyle?:string, lineWidth?:number, x?:number, y?:number, endX?:number, endY?:number):T;
 
     /**
      *
@@ -369,12 +392,12 @@ export interface Engine {
      *
      * @param source.
      */
-    sprite<T extends Sprite>(source:Array<string>|string):T ;
+    sprite<T extends Sprite>(source:Array<string>|string|Frame):T ;
 
     /**
      * An interactive button with `up` `over` and `down` states. Optional `press` and `release` actions.
      */
-    button(source:Array<string>|string):InteractiveSprite ;
+    button(source:Array<string>|string):Sprite ;
 
 }
 
