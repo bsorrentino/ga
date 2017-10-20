@@ -28,6 +28,9 @@ export interface DisplayableObject  {
     vx:number;
     vy:number;
 
+    scaleX:number;
+    scaleY:number;
+    
     pivotX:number;
     pivotY:number;
 
@@ -43,7 +46,7 @@ export interface DisplayableObject  {
     layer:number;
 
     readonly gx:number;
-    readonly gY:number;
+    readonly gy:number;
     readonly halfWidth:number;
     readonly halfHeight:number;
     readonly position:Coordinate;
