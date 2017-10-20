@@ -148,7 +148,7 @@ interface InteractiveFeature  {
 /**
  *
  */
-export interface Sprite extends InteractiveFeature,DisplayableObject {
+interface Sprite extends InteractiveFeature,DisplayableObject {
 
     circular:boolean;
     radius:number;
@@ -189,7 +189,9 @@ export interface Text extends DisplayableObject {
     content:string;
 }
 
-export interface Rectangle extends DisplayableObject {
+export interface Rectangle extends Sprite {
+    mask:boolean;
+
     fillStyle:string;
     strokeStyle:string;
     /**
@@ -202,6 +204,9 @@ export interface Rectangle extends DisplayableObject {
 }
 
 export interface Circle extends Sprite {
+
+    mask:boolean;
+
     fillStyle:string;
     strokeStyle:string;
     diameter:number;
@@ -228,6 +233,10 @@ interface Pointer {
     readonly centerX:number;
     readonly centerY:number;
     readonly position:Coordinate;
+
+    isDown:boolean;
+    isUp:boolean;
+    tapped:boolean;
 
     press:()=>void;
     release:()=>void;
@@ -357,12 +366,12 @@ export interface Engine {
     /**
      *
      */
-    rectangle<T extends Rectangle>( widthPx:number, heightPx:number, fillColor:string, strokeColor?:string, lineWidth?:number, x?:number, y?:number ):T;
+    rectangle<T extends Rectangle>( widthPx:number, heightPx:number, fillColor?:string, strokeColor?:string, lineWidth?:number, x?:number, y?:number ):T;
 
     /**
      *
      */
-    circle( diameter:number, fillstyle:string, stroketyle?:string, lineWidth?:number, x?:number, y?:number ):Circle;
+    circle<T extends Circle>( diameter:number, fillstyle?:string, stroketyle?:string, lineWidth?:number, x?:number, y?:number ):T;
 
     /**
      * `line` creates and returns a line with a start and end points.

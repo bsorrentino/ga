@@ -240,6 +240,10 @@ type Follower = BaseObject
 type Leader   = BaseObject;
 
 
+interface Sprite  {
+  direction?:""|"left"|"up"|"right"|"down";
+}
+
 export interface Engine {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
