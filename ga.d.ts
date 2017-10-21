@@ -253,6 +253,13 @@ interface Frame extends Bounds {
   image:string;
 }
 
+interface Frames extends Bounds {
+    image:string;
+    data:Array<[number,number]>;
+    width:number;
+    height:number;
+}
+  
 /**
  *
  */
@@ -367,6 +374,14 @@ export interface Engine {
      */
     frame(source:string, x:number, y:number, width:number, height:number):Frame;
 
+    /** 
+    * The `frames` function returns and object that defines
+    * the position and size of many sub-images in a single tileset image.
+    * arguments: sourceString, 2DArrayOfXandYPositions, widthOfSubImage,
+    * heightOfSubImage.
+    */
+    frames(source:string, arrayOfPositions:Array<[number,number]>, width:number, height:number):Frames;
+
     /**
      *
      */
@@ -405,7 +420,7 @@ export interface Engine {
      *
      * @param source.
      */
-    sprite<T extends Sprite>(source:Array<string>|string|Frame):T ;
+    sprite<T extends Sprite>(source:Array<string>|string|Frame|Frames):T ;
 
     /**
      * An interactive button with `up` `over` and `down` states. Optional `press` and `release` actions.
