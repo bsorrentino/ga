@@ -163,7 +163,7 @@ export interface Tween {
     play():void;
     pause():void;
 
-    onCompleted:()=>void;
+    onComplete:()=>void;
 }
 
 export type Path = Tween;

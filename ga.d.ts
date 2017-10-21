@@ -217,7 +217,8 @@ export interface Circle extends Sprite {
 }
 
 export interface Stage extends DisplayableObject {
-
+    
+    swapChildren( child1:DisplayableObject, child2:DisplayableObject):void
 }
 
 /**
