@@ -218,7 +218,7 @@ export interface Circle extends Sprite {
     radius:number;
 }
 
-export interface Stage extends DisplayableObject {
+export interface Stage extends Sprite {
     
     swapChildren( child1:DisplayableObject, child2:DisplayableObject):void
 }
