@@ -331,7 +331,8 @@ rotateAroundPoint(pointX:number, pointY:number, distanceX:number, distanceY:numb
  * @param s1 A sprite object with `centerX` and `centerY` properties.
  * @param s2 A sprite object with `centerX` and `centerY` properties.
  */
-angle(s1:DisplayableObject, s2:DisplayableObject):number;
+angle(  s1:{centerX:number,centerY:number}, 
+        s2:{centerX:number,centerY:number} ):number;
 
 /*
  *
