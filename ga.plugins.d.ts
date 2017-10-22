@@ -472,7 +472,6 @@ breathe( sprite:DisplayableObject,
             endScaleX:number,
             endScaleY:number,
             frames?:number,
-            type?:EasingType,
             yoyo?:boolean,
             delayBeforeRepeat?:number ):Tween;
 /**
