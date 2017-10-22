@@ -2,12 +2,12 @@
 
 declare namespace GA {
 
-export type Collision = undefined |
+type Collision = undefined |
                         "left" |
                         "top" |
                         "right" |
                         "bottom";
-export type Hitting = undefined |
+type Hitting = undefined |
                       "topLeft" |
                       "topRight" |
                       "bottomLeft" |
@@ -17,7 +17,7 @@ export type Hitting = undefined |
                       "leftMiddle" |
                       "rightMiddle";
 
-export type EasingType =
+type EasingType =
             //Linear
             "linear" |
             //Smoothstep
@@ -45,7 +45,7 @@ export type EasingType =
             "spline"
 ;
 
-export interface Camera {
+interface Camera {
 
     x:number;
     y:number;
@@ -66,7 +66,7 @@ export interface Camera {
     centerOver(sprite:DisplayableObject):void;
 }
 
-export interface Sound  {
+interface Sound  {
 
     /**
      *
@@ -151,7 +151,7 @@ export interface Sound  {
 
 }
 
-export interface Tween {
+interface Tween {
     // bounce
     startMagnitude?:number;
     endMagnitude?:number;
@@ -171,37 +171,37 @@ export interface Tween {
     onComplete:()=>void;
 }
 
-export type Path = Tween;
+type Path = Tween;
 
 
-export type ProgressBar = {
+type ProgressBar = {
 
     create( canvas:HTMLCanvasElement, assets:Array<any> ):void;
     update():void;
     remove():void;
 }
 
-export interface Particle extends DisplayableObject {
+interface Particle extends DisplayableObject {
     scaleSpeed:number;
     alphaSpeed:number;
     rotationSpeed:number;
 }
 
-export type ParticleStream = {
+type ParticleStream = {
 
     playing:boolean;
     play():void;
     stop():void;
 }
 
-export interface TilingSprite extends Rectangle {
+interface TilingSprite extends Rectangle {
 
     tileX:number;
     tileY:number;
 
 }
 
-export type SurroundingCells = [
+type SurroundingCells = [
     number,
     number,
     number,
@@ -213,7 +213,7 @@ export type SurroundingCells = [
     number
 ];
 
-export type CornerPoints = {
+type CornerPoints = {
     topLeft: Coordinate;
     topRight: Coordinate;
     bottomLeft: Coordinate;
@@ -221,6 +221,7 @@ export type CornerPoints = {
 }
 
 interface TiledSprite extends DisplayableObject {
+    name:string;
     gid:number;
     index:number;
 }
@@ -231,7 +232,7 @@ interface TileLayer {
 
 interface TiledWorld extends Group {
 
-    getObject(name:string):TiledSprite|TileLayer;
+    getObject<T extends TiledSprite|TileLayer>(name:string):T;
     getObjects(name:string):[TiledSprite];
 
     tilewidth:number;
@@ -249,7 +250,7 @@ interface Sprite  {
   direction?:""|"left"|"up"|"right"|"down";
 }
 
-export interface Engine {
+interface Engine {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///
@@ -289,7 +290,7 @@ move( sprites:DisplayableObject|Array<DisplayableObject> ):void;
  * @param s1 sprite object with `centerX` and `centerX` properties.
  * @param s2 sprite object with `centerX` and `centerX` properties.
  */
-distance( s1:DisplayableObject, s2:DisplayableObject):number;
+distance( s1:DisplayableObject, s2:DisplayableObject|Pointer):number;
 
 /**
  * Make a sprite ease to the position of another sprite.
@@ -616,16 +617,16 @@ shoot<T extends DisplayableObject>(
  *      );
  *
 */
-grid( columns?:number,
+grid<A extends DisplayableObject, T extends Group>( columns?:number,
     rows?:number,
     cellWidth?:number,
     cellHeight?:number,
     centerCell?:boolean,
     xOffset?:number,
     yOffset?:number,
-    makeSprite?:()=>DisplayableObject,
+    makeSprite?:()=>A,
     extra?:()=>void
-  ):Group;
+  ):T;
 
 /**
  * Use the `progressBar` to display the percentage of assetes being loaded.
@@ -843,6 +844,20 @@ contain(s:DisplayableObject, bounds:Bounds, bounce?:boolean, onCollision?:(colli
 ///
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/** 
+ * 
+ *   An universal collision method that works for rectangular and circular sprites.
+ *   it figures out what kinds of sprites are involved in the collision and
+ *   automatically chooses the correct collision method.
+ */
+
+hit(a:DisplayableObject|Pointer, 
+    b:DisplayableObject|DisplayableObject[], 
+    react?:boolean, 
+    bounce?:boolean, 
+    global?:boolean, 
+    extra?:(collision:GA.Collision, where:DisplayableObject) => void):Collision;
+
 /**
  * Use it to find out if a point is touching a circular or rectangular sprite.
  *
@@ -920,7 +935,7 @@ movingCircleCollision(c1:Circle, c2:Circle, global?:boolean):boolean;
 /**
  * Checks all the circles in an array for a collision against all the other circles in an array, using `movingCircleCollision`
  */
-multipleCircleCollision( arrayOfCircles:[Circle],  global?:boolean):void;
+multipleCircleCollision<T extends Circle>( arrayOfCircles:Array<T>,  global?:boolean):void;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///
@@ -981,8 +996,8 @@ getPoints(s:DisplayableObject):CornerPoints
  * @param worldObject object has to have these properties: `tileheight`, `tilewidth`, `widthInTiles`
  * @param spritesPointsToCheck
  */
-hitTestTile(
-        sprite:TiledSprite,
+hitTestTile<T extends DisplayableObject>(
+        sprite:T,
         mapArray:[number],
         gidToCheck:number,
         world:TiledWorld,
@@ -1031,7 +1046,7 @@ fourKeyController(s:DisplayableObject, speed:number, up:number, right:number, do
 /// TILED EDITOR IMPORTER
 ///
 ///
-/// [N] `makeTiledWorld`: Creates a game world using Tiled Editor's JSON export data.
+/// [N] `makeTiledWorld`: Creates a game world using Tiled Editor's JSON data.
 ///
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
