@@ -3,7 +3,7 @@
 // Drag and drop
 
 
-/// <reference path="../ga.plugins.d.ts" />  
+/// <reference path="../ga.d.ts" />  
 
 (function () {
 
@@ -22,7 +22,7 @@ g.start();
 //Declare global sprites, objects, and variables
 //that you want to access in all the game functions and states
 
-var cat, hedgehog, tiger;
+var cat:GA.Sprite, hedgehog:GA.Sprite, tiger:GA.Sprite;
 
 //A `setup` function that will run only once.
 //Use it for initialization tasks

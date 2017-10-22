@@ -1,8 +1,5 @@
  
-
 // Tweening
-
-
 
 /// <reference path="../ga.plugins.d.ts" />  
 
@@ -16,7 +13,7 @@ to use them.
 
 //Create a new GA instance, and start it.
 //Pre-load images in the array.
-var g = ga(
+let g = ga(
   1024, 512, setup, 
   [
     "images/animals.json"
@@ -32,24 +29,25 @@ function setup() {
   g.canvas.style.border = "1px black dashed";
 
   //Create some sprites 
-  var cat1 = g.sprite("cat.png");
-    text1 = g.text("slide", "20px Futura", "black");
+  let cat1 = g.sprite("cat.png"),
+    text1 = g.text("slide", "20px Futura", "black"),
     tiger1 = g.sprite("tiger.png"),
-    tiger1.setPosition(128, 128),
     text2 = g.text("slide with bounce", "20px Futura", "black"),
     hedgehog1 = g.sprite("hedgehog.png"),
-    hedgehog1.setPosition(0, 300),
     text3 = g.text("pulse", "20px Futura", "black"),
     cat2 = g.sprite("cat.png"),
-    cat2.setPosition(192, 300),
     text4 = g.text("breathe", "20px Futura", "black"),
     tiger2 = g.sprite("tiger.png"),
-    tiger2.setPosition(384, 300),
     text5 = g.text("strobe", "20px Futura", "black"),
     hedgehog2 = g.sprite("hedgehog.png"),
-    hedgehog2.setPosition(576, 300),
     text6 = g.text("wobble", "20px Futura", "black");
 
+  tiger1.setPosition(128, 128),
+  hedgehog1.setPosition(0, 300),
+  cat2.setPosition(192, 300),
+  tiger2.setPosition(384, 300),
+  hedgehog2.setPosition(576, 300),
+    
   //Add the text to the sprites
   cat1.addChild(text1);
   cat1.putRight(text1, 32);
@@ -110,7 +108,7 @@ function setup() {
   //magnitude. This gives the tween a bit of extra bounce at its start
   //and end points. "5" and "-5" are good values to start, but
   //experiment with different values
-  var tigerSlide = g.slide(tiger1, 528, tiger1.y, 120, "bounce 5 -5", true, 0);
+  var tigerSlide = g.slide(tiger1, 528, tiger1.y, 120, "bounce 5 -5" as any, true, 0);
 
   /* Fade effects */
 
