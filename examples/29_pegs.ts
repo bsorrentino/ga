@@ -17,13 +17,20 @@ This file requires these convenience functions from `plugins.js`:
 
 //Create a new GA instance, and start it.
 
-var g = ga(256, 256, setup);
+let g = ga(256, 256, setup);
 g.start();
 
 //Declare global sprites, objects, and variables
 //that you want to access in all the game functions and states
 
-var ball, pegs;
+interface Ball extends GA.Circle {
+  gravity:number;
+  frictionX:number;
+  frictionY:number;
+  mass:number;
+
+} 
+var ball:Ball, pegs:GA.Group;
 
 //A `setup` function that will run only once.
 //Use it for initialization tasks
@@ -90,13 +97,13 @@ function setup() {
     5, 4, 48, 48, 
     true, 0, 0,
     //A function that describes how to make each peg in the grid
-    function() {
+    () => {
       var peg = g.circle(g.randomInt(8, 32), "blue");
       peg.fillStyle = colors[g.randomInt(0, 4)];
       return peg;
     },
     //Run any extra code after each peg is made, if you want to
-    function() {console.log("extra!");}
+    () => {console.log("extra!");}
   );
 
   //Position the grid of pegs

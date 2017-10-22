@@ -32,13 +32,13 @@ g.start();
 g.scaleToWindow();
 
 //Optionally re-scale the canvas if the browser window is changed
-window.addEventListener("resize", function(event){ 
+window.addEventListener("resize", (event) => { 
   g.scaleToWindow();
 });
 
 //Game variables
-var paddle, ball, topBorder, blocks, blockFrames,
-    music, bounceSound, message, titleMessage,
+var paddle:GA.Sprite, ball:GA.Sprite, topBorder:GA.Rectangle, blocks:GA.Group, blockFrames:Array<string>,
+    music:GA.Sound, bounceSound:GA.Sound, message:GA.Text, titleMessage:GA.Text,
 
     //The size of the grid of blocks
     gridWidth = 8,
@@ -47,16 +47,16 @@ var paddle, ball, topBorder, blocks, blockFrames,
     cellHeight = 64,
 
     //title sprites
-    title, playButton,
+    title:GA.Sprite, playButton:GA.Sprite,
 
     //Groups
-    titleScene, gameScene,
+    titleScene:GA.Group, gameScene:GA.Group,
 
     //Score
     score = 0,
 
     //The paddle wobble tween
-    paddleWobble;
+    paddleWobble:GA.Tween;
  
 function load() {
   //Display the loading progress bar wile the game
@@ -140,7 +140,7 @@ function setup() {
   blocks = g.grid(
     gridWidth, gridHeight, 64, 64,
     false, 0, 0,
-    function(){
+    () => {
 
       //Choose a random block from the tileset for each grid cell
       var randomBlock = g.randomInt(0, 4);
@@ -167,7 +167,7 @@ function setup() {
   //Start the music, set the `state` to `play`
   //make `titleScene` slide out to the right and
   //the `gameScene` slide in from the left
-  playButton.press = function(){
+  playButton.press = () => {
     if (!music.playing) music.play();
     g.state = play;
     g.slide(titleScene, 514, 0, 30, "decelerationCubed");
@@ -240,7 +240,7 @@ function play() {
 
   var ballHitsPaddle = g.hit(
     ball, paddle, true, true, true,
-    function(collision){
+    (collision) => {
 
       //1. Play the bounce sound
       bounceSound.play();
@@ -277,8 +277,8 @@ function play() {
 
   var ballHitsBlock = g.hit(
     ball, blocks.children, true, true, true,
-    function(collision, block){
-
+    (collision, block) => {
+      
       //Add 1 to the score, play the bounce sound
       //and remove the block that was hit
       score += 1;
@@ -340,7 +340,7 @@ function end() {
 
   //Assign a new button `press` action to
   //`restart` the game
-  playButton.press = function() {
+  playButton.press = () => {
     restart();
   };
 }
@@ -354,7 +354,7 @@ function restart() {
   blocks = g.grid(
     gridWidth, gridHeight, 64, 64,
     false, 0, 0,
-    function() {
+    () => {
 
       //Choose a random block from the 
       //`blockFrames` array for each grid cell
@@ -391,3 +391,5 @@ function restart() {
   g.resume();
 }
 
+
+})();

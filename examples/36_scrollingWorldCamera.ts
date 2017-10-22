@@ -57,11 +57,25 @@ g.start();
 //Set the frames per second to 30
 g.fps = 30;
 
+
+interface Elf extends GA.Sprite {
+  states:{
+    up: number,
+    left: number,
+    down: number,
+    right: number,
+    walkUp: [number, number],
+    walkLeft: [number, number],
+    walkDown: [number, number],
+    walkRight: [number, number]
+  };
+
+}
 //Declare global sprites, objects, and variables
 //that you want to access in all the game functions and states
 
-var world, elf, elfTextures, world, camera,
-    itemsLayer, itemsMapArray, items, message;
+var world:GA.TiledWorld, elf:Elf, elfTextures, camera:GA.Camera,
+    itemsLayer:GA.TiledSprite, itemsMapArray:[number], items:Array<GA.TiledSprite>, message:GA.Text;
 
 //A `setup` function that will run only once.
 //Use it for initialization tasks
@@ -85,11 +99,13 @@ function setup() {
   Position the elf sprite in the same place as the elf object
   */
 
-  elf.x = world.getObject("elf").x;
-  elf.y = world.getObject("elf").y;
+  let ts = world.getObject("elf") as GA.TiledSprite;
+
+  elf.x = ts.x;
+  elf.y = ts.y;
 
   //Add the elf sprite the map's "objects" layer group
-  var objectsLayer = world.getObject("objects");
+  var objectsLayer = world.getObject("objects") as GA.TiledSprite;
   objectsLayer.addChild(elf);
 
   //If you want to, add the sprite to a different world layer,
@@ -101,11 +117,11 @@ function setup() {
 
   //Get all the items on the items layer (the skull, marmot and heart). 
   //The `itemLayer` group's `children` array contains all of them.
-  itemsLayer = world.getObject("items");
+  itemsLayer = world.getObject("items") as GA.TiledSprite;
 
   //Clone the `itemLayer.children` array so that you have your own
   //array of all three item sprites (the heart, skull and marmot)
-  items = itemsLayer.children.slice(0);
+  items = itemsLayer.children.slice(0) as Array<GA.TiledSprite>;
   
   /*
   If you ever need to extract sprites with specific gid numbers in a 
@@ -117,7 +133,8 @@ function setup() {
 
   */
   //Get a reference to the array containing the map items
-  itemsMapArray = world.getObject("items").data;
+  let tl = world.getObject("items") as GA.TileLayer;
+  itemsMapArray = tl.data;
 
   /*
   Create the camera and center it over the elf.
@@ -167,52 +184,52 @@ function setup() {
   elf.fps = 18;
  
   //Create some keyboard objects
-  leftArrow = g.keyboard(37);
-  upArrow = g.keyboard(38);
-  rightArrow = g.keyboard(39);
-  downArrow = g.keyboard(40);
+  let leftArrow = g.keyboard(37);
+  let upArrow = g.keyboard(38);
+  let rightArrow = g.keyboard(39);
+  let downArrow = g.keyboard(40);
   
   //Assign key `press` and release methods that
   //show and play the elf's different states
-  leftArrow.press = function() {
+  leftArrow.press = () => {
     elf.playSequence(elf.states.walkLeft);
     elf.vx = -2;
     elf.vy = 0;
   };
-  leftArrow.release = function() {
+  leftArrow.release = () => {
     if (!rightArrow.isDown && elf.vy === 0) {
       elf.vx = 0;
       elf.show(elf.states.left);
     }
   };
-  upArrow.press = function() {
+  upArrow.press = () => {
     elf.playSequence(elf.states.walkUp);
     elf.vy = -2;
     elf.vx = 0;
   };
-  upArrow.release = function() {
+  upArrow.release = () => {
     if (!downArrow.isDown && elf.vx === 0) {
       elf.vy = 0;
       elf.show(elf.states.up);
     }
   };
-  rightArrow.press = function() {
+  rightArrow.press = () => {
     elf.playSequence(elf.states.walkRight);
     elf.vx = 2;
     elf.vy = 0;
   };
-  rightArrow.release = function() {
+  rightArrow.release = () => {
     if (!leftArrow.isDown && elf.vy === 0) {
       elf.vx = 0;
       elf.show(elf.states.right);
     }
   };
-  downArrow.press = function() {
+  downArrow.press = () => {
     elf.playSequence(elf.states.walkDown);
     elf.vy = 2;
     elf.vx = 0;
   };
-  downArrow.release = function() {
+  downArrow.release = () => {
     if (!upArrow.isDown && elf.vx === 0) {
       elf.vy = 0;
       elf.show(elf.states.down);
@@ -243,8 +260,10 @@ function play() {
   //check for a collision between the elf and the ground tiles
   //(See the example `tiledEditorSupport.html` for details on how to
   //`hitTestTile` - it's not difficult)
-  var obstaclesMapArray = world.getObject("obstacles").data;
-  var elfVsGround = g.hitTestTile(elf, obstaclesMapArray, 0, world, "every");
+  let ol = world.getObject("obstacles") as GA.TileLayer;
+
+  let obstaclesMapArray = ol.data;
+  let elfVsGround = g.hitTestTile(elf, obstaclesMapArray, 0, world, "every");
 
   //If the elf isn't touching any ground tiles, it means its touching
   //an obstacle, like a bush, the bottom of a wall, or the bottom of a
@@ -270,14 +289,14 @@ function play() {
   //If the elf is touching an item tile, filter through all the items
   //in the `items` array and remove the item being touched.
   if (!elfVsItems.hit) {
-    items = items.filter(function(item) {
+    items = items.filter((item) => {
       //Does the current item match the elf's position?
       if (item.index === elfVsItems.index) {
         //Display the message
         message.visible = true;
         message.content = "You found a " + item.name;
         //Make the message disappear after 3 seconds
-        g.wait(3000, function(){
+        g.wait(3000, () =>{
           message.visible = false;
         });
         //Remove the item

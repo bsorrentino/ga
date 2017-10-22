@@ -33,7 +33,7 @@ var pointer,
     sky:GA.TilingSprite,
     blocks:GA.Group,
     title:GA.Sprite,
-    goButton:GA.InteractiveSprite,
+    goButton:GA.Sprite,
     finish:GA.Sprite,
     dust:GA.ParticleStream,
     dustFrames:Array<string>;

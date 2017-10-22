@@ -14,13 +14,22 @@ Learn how to create a generic tank vehicle.
 
 //Create a new GA instance, and start it.
 
-var g = ga(256, 256, setup, ["fonts/puzzler.otf"]);
+let g = ga(256, 256, setup, ["fonts/puzzler.otf"]);
 g.start();
+
+interface Tank extends GA.Group {
+  accelerationX:number;
+  accelerationY:number;
+  friction:number;
+  rotationSpeed:number;
+  moveForward:boolean;
+  speed:number;
+}
 
 //Declare global sprites, objects, and variables
 //that you want to access in all the game functions and states
 
-var tank, message;
+var tank:Tank, message:GA.Text;
 
 //A `setup` function that will run only once.
 //Use it for initialization tasks
@@ -58,32 +67,32 @@ function setup() {
   
   //Set the tank's `rotationSpeed` to -0.1 (to rotate left) if the
   //left arrow key is being pressed
-  g.key.leftArrow.press = function() {
+  g.key.leftArrow.press = () => {
     tank.rotationSpeed = -0.1;
   };
 
   //If the left arrow key is released and the right arrow
   //key isn't being pressed down, set the `rotationSpeed` to 0
-  g.key.leftArrow.release = function() {
+  g.key.leftArrow.release = () => {
     if (!g.key.rightArrow.isDown) tank.rotationSpeed = 0;
   };
 
   //Do the same for the right arrow key, but set
   //the `rotationSpeed` to 0.1 (to rotate right)
-  g.key.rightArrow.press = function() {
+  g.key.rightArrow.press = () => {
     tank.rotationSpeed = 0.1;
   };
 
-  g.key.rightArrow.release = function() {
+  g.key.rightArrow.release = () => {
     if (!g.key.leftArrow.isDown) tank.rotationSpeed = 0;
   };
 
   //Set `tank.moveForward` to `true` if the up arrow key is
   //pressed, and set it to `false` if it's released
-  g.key.upArrow.press = function() {
+  g.key.upArrow.press = () => {
     tank.moveForward = true;
   };
-  g.key.upArrow.release = function() {
+  g.key.upArrow.release = () => {
     tank.moveForward = false;
   };
 
@@ -125,7 +134,7 @@ function play() {
   tank.y += tank.vy;
 
   //Display the tank's angle of rotation
-  message.content = tank.rotation;
+  message.content = String(tank.rotation);
 
 }
 

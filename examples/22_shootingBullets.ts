@@ -20,13 +20,13 @@ This file requires these convenience functions from `plugins.js`:
 
 //Create a new GA instance, and start it.
 
-var g = ga(256, 256, setup);
+let g = ga(256, 256, setup);
 g.start();
 
 //Declare global sprites, objects, and variables
 //that you want to access in all the game functions and states
 
-var box, turret, bullets, message;
+var box:GA.Rectangle, turret:GA.Line, bullets:Array<GA.DisplayableObject>, message:GA.Text;
 
 //A `setup` function that will run only once.
 //Use it for initialization tasks
@@ -57,7 +57,7 @@ function setup() {
   //time the player clicks or taps the stage a bullet will be fired
   //from the turret
   g.stage.interactive = true;
-  g.stage.press = function() {
+  g.stage.press = () => {
     g.shoot(
       box,           //The shooter
       box.rotation,  //The angle at which to shoot
@@ -66,9 +66,7 @@ function setup() {
       bullets,        //The array used to store the bullets
       //A function that returns the sprite that should
       //be used to make each bullet
-      function() {
-        return g.circle(8, "red");
-      }
+      () => g.circle(8, "red")
     );
   };
 
@@ -96,7 +94,7 @@ function play() {
   //Remove the bullets if they cross the screen boundaries
   //Loop through the bullets using `filter` so that we can remove
   //the bullet easily
-  bullets = bullets.filter(function(bullet) {
+  bullets = bullets.filter((bullet) => {
     //Move the bullet
     g.move(bullet);
     //Check for a collision with the stage boundary

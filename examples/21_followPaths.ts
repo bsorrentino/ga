@@ -1,8 +1,4 @@
- 
-
-// Tweening
-
-
+ // Tweening
 
 /// <reference path="../ga.plugins.d.ts" />  
 
@@ -15,7 +11,7 @@ path between a series of connected waypoints.
 
 //Create a new GA instance, and start it.
 //Pre-load images in the array.
-var g = ga(
+let g = ga(
   512, 600, setup, 
   [
     "images/animals.json"
@@ -31,13 +27,13 @@ function setup() {
   g.canvas.style.border = "1px black dashed";
 
   //The cat sprite
-  var cat = g.sprite("cat.png"); 
+  let cat = g.sprite("cat.png"); 
   cat.setPosition(32, 32);
 
   //Use `walkPath` to make the cat follow a straight path 
   //between a series of connected waypoints. Here's how to use it:
 
-  var catPath = g.walkPath(
+  let catPath = g.walkPath(
     cat,                   //The sprite
 
     //An array of x/y waypoints to connect in sequence
@@ -57,7 +53,7 @@ function setup() {
   ); 
 
   //The hedgehog sprite
-  hedgehog = g.sprite("hedgehog.png"); 
+  let hedgehog = g.sprite("hedgehog.png"); 
   hedgehog.setPosition(32, 256);
 
   //Use `walkCurve` to make the hedgehog follow a curved path 

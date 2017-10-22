@@ -49,11 +49,14 @@ var g = ga(512, 512, setup,
 );
 g.start();
 
+interface Alien extends GA.TiledSprite {
+  direction:""|"none"|"left"|"up"|"right"|"down";
+}
 //Declare global sprites, objects, and variables
 //that you want to access in all the game functions and states
 
-var world, alien, message, wallMapArray,
-    bombMapArray, bombSprites, bombLayer;
+var world:GA.TiledWorld, alien:Alien, message, wallMapArray:[number],
+    bombMapArray:[number], bombSprites:GA.TiledSprite[], bombLayer:GA.TileLayer;
 
 //A `setup` function that will run only once.
 //Use it for initialization tasks
@@ -73,7 +76,7 @@ function setup() {
   returns and sprite in the `world` that has a `name` property that
   matches the string in the argument.
   */
-  alien = world.getObject("alien");
+  alien = world.getObject("alien") as Alien;
 
   /*
   Each Tiled Editor layer has a `name` that can be accessed in your
@@ -86,7 +89,8 @@ function setup() {
   `data` array of sprites like this: 
   */
 
-  wallMapArray = world.getObject("wallLayer").data;
+  let wallMap = world.getObject("wallLayer") as GA.TileLayer;
+  wallMapArray = wallMap.data;
 
   /*
   We also need a reference to the bomb layer. All Tiled Editor layers are 
@@ -95,7 +99,7 @@ function setup() {
   that layer, if you even need to do that. 
   */
 
-  bombLayer = world.getObject("bombLayer");
+  bombLayer = world.getObject("bombLayer") as GA.TileLayer;
 
   //Get a reference to the level's bomb layer array. This is the
   //bomb layer's `data` array
@@ -119,10 +123,10 @@ function setup() {
   alien.direction = "";
 
   //Configure Ga's built in arrow keys to assign the alien a direction
-  g.key.leftArrow.press = function() {alien.direction = "left"}; 
-  g.key.upArrow.press = function() {alien.direction = "up"}; 
-  g.key.rightArrow.press = function() {alien.direction = "right"}; 
-  g.key.downArrow.press = function() {alien.direction = "down"}; 
+  g.key.leftArrow.press = () => {alien.direction = "left"}; 
+  g.key.upArrow.press = () => {alien.direction = "up"}; 
+  g.key.rightArrow.press = () => {alien.direction = "right"}; 
+  g.key.downArrow.press = () => {alien.direction = "down"}; 
 
   //Change the game state to `play`
   g.state = play;  

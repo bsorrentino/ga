@@ -25,10 +25,60 @@ var g = ga(
 );
 g.start();
 
+interface Player extends GA.Sprite {
+  accelerationX:number;
+  accelerationY:number;
+  frictionX:number;
+  frictionY:number;
+  jumpForce:number;
+  isOnGround:boolean;
+  gravity:number;
+}
+
+type Cell =  {
+  x:number,
+  y:number,
+  item:""|"player"|"treasure",
+  terrain?:"rock"|"sky"|"grass"|"border"
+};
+
+interface World extends GA.Group {
+  map:Array<Cell>;
+  itemLocations:Array<Cell>;
+  platforms:Array<GA.DisplayableObject>;
+  treasure:Array<GA.Sprite>;
+
+  player:Player|null;
+
+}
+
 //Declare global sprites, objects, and variables
 //that you want to access in all the game functions and states
 
-var level, world, player, output, score;
+var world:World, player:Player, output:GA.Text, score:number;
+
+const level = {
+  //The height and width of the level, in tiles
+  widthInTiles: 16,
+  heightInTiles: 16,
+  //The width and height of each tile, in pixels
+  tilewidth: 32,
+  tileheight: 32,
+  //Tileset image properties. You could use a texture atlas, but 
+  //let's go old-skool on this one and just blit from directly from
+  //an image
+  tileset: { 
+    //The source image
+    source: "images/platforms.png",
+    //The x/y coordinates for the sprites on the tileset
+    player: [32, 32],
+    treasure: [32, 0],
+    cloud: [64, 0],
+    sky: [64, 32],
+    rock: [0, 32],
+    grass: [0, 0]
+  }
+};
 
 //A `setup` function that will run only once.
 //Use it for initialization tasks
@@ -39,36 +89,16 @@ function setup() {
   g.canvas.style.border = "1px black dashed";
 
   //Create a `level` object with some basic data about the game world
-  var level = {
-    //The height and width of the level, in tiles
-    widthInTiles: 16,
-    heightInTiles: 16,
-    //The width and height of each tile, in pixels
-    tilewidth: 32,
-    tileheight: 32,
-    //Tileset image properties. You could use a texture atlas, but 
-    //let's go old-skool on this one and just blit from directly from
-    //an image
-    tileset: { 
-      //The source image
-      source: "images/platforms.png",
-      //The x/y coordinates for the sprites on the tileset
-      player: [32, 32],
-      treasure: [32, 0],
-      cloud: [64, 0],
-      sky: [64, 32],
-      rock: [0, 32],
-      grass: [0, 0]
-    }
-  };
 
   //Use the level to make the game world. See the `makeWorld` function
   //below for details on how it works. It creates a random platform
   //game environment procedurally. It returns a `group` sprite that
   //contains all the game objects we'll need.
-  world = makeWorld(level);
+  world = makeWorld();
 
   //Get a reference to the `player` sprite
+  if( !world.player ) throw "Player not initialized!";
+
   player = world.player;
 
   //Add some text to display the score
@@ -79,29 +109,29 @@ function setup() {
 
   //Assign the player's keyboard keys
   //Left arrow key
-  g.key.leftArrow.press = function() {
+  g.key.leftArrow.press = () => {
     if(g.key.rightArrow.isUp) {
       player.accelerationX = -0.2;
     }
   };
-  g.key.leftArrow.release = function() {
-    if(g.key.rightArrow.isUp) {
+  g.key.leftArrow.release = () => {
+    if(g.key.rightArrow.isUp ) {
       player.accelerationX = 0;
     }
   };
   //Right arrow key
-  g.key.rightArrow.press = function() {
+  g.key.rightArrow.press = () => {
     if(g.key.leftArrow.isUp) {
       player.accelerationX = 0.2;
     }
   };
-  g.key.rightArrow.release = function() {
+  g.key.rightArrow.release = () => {
     if(g.key.leftArrow.isUp) {
       player.accelerationX = 0;
     }
   };
   //Space key (jump)
-  g.key.space.press = function() {
+  g.key.space.press = () => {
     if(player.isOnGround) {
       player.vy += player.jumpForce;
       player.isOnGround = false;
@@ -144,7 +174,7 @@ function play() {
   //player and the platforms
   var playerVsPlatforms = g.hit(
     player, world.platforms, true, false, false,
-    function(collision, platform) {
+    (collision:GA.Collision, platform:any) => {
       //Use the collision variable to figure out what side of the player
       //is hitting the platform
       if (collision) {
@@ -216,7 +246,7 @@ function play() {
   //Use `filter` and `hit` to check whether the player is touching a
   //star. If it is, add 1 to the score, remove the `star` sprite and filter it out of the 
   //`world.treasure` array
-  world.treasure = world.treasure.filter(function(star) {
+  world.treasure = world.treasure.filter((star) => {
     if (g.hit(player, star)){
       score += 1;
       g.remove(star);
@@ -239,9 +269,9 @@ function play() {
 //way you could do this, so this is just an idea to help you get
 //started making your own procedural game levels 
 
-function makeWorld(level) {
+function makeWorld():World {
   //create the `world` object
-  var world = g.group();
+  let world:World = g.group();
 
   //Add some arrays to the world that will store the objects that we're
   //going to create
@@ -270,7 +300,7 @@ function makeWorld(level) {
     //The `cellIsAlive` helper function.
     //Give each cell a 1 in 4 chance to live. If it's "alive", it will
     //be rock, if it's "dead" it will be sky
-    var cellIsAlive = function(){return g.randomInt(0, 3) === 0};
+    var cellIsAlive = () =>{return g.randomInt(0, 3) === 0};
     
     //A loop creates a `cell` object for each 
     //grid cell on the map. Each `cell` has a name, and a `x` and `y` 
@@ -285,7 +315,7 @@ function makeWorld(level) {
       var x = i % level.widthInTiles,
           y = Math.floor(i / level.widthInTiles);
       //Create the `cell` object 
-      var cell = {
+      const cell:Cell = {
         x: x,
         y: y,
         item: ""
@@ -306,11 +336,9 @@ function makeWorld(level) {
 
     //A `getIndex` helper function to convert the cell x and y position to an
     //array index number
-    var getIndex = function(x, y) {
-      return x + (y * level.widthInTiles)
-    };
+    var getIndex = (x:number, y:number) => x + (y * level.widthInTiles) ;
     
-    world.map.forEach(function(cell, index, map) {
+    world.map.forEach((cell, index, map) => {
       //Some variables to help find the cells to the left, right, below
       //and above the current cell
       var cellTotheLeft = world.map[getIndex(cell.x - 1, cell.y)],
@@ -366,7 +394,7 @@ function makeWorld(level) {
 
   function addItems() {
     //The `findStartLocation` helper function returns a random cell
-    var findStartLocation = function() {
+    var findStartLocation = () => {
       //Randomly choose a start location from the itemLocations array
       var randomIndex = g.randomInt(0, world.itemLocations.length - 1);
       var location = world.itemLocations[randomIndex];
@@ -398,8 +426,8 @@ function makeWorld(level) {
     //`platforms` array so that use them for collision in the game loop
     
     //Make the terrain
-    world.map.forEach(function(cell, index, map) {
-      var sprite,
+    world.map.forEach((cell, index, map) => {
+      var sprite:GA.Rectangle,
           frame,
           x = cell.x * level.tilewidth,
           y = cell.y * level.tileheight,
@@ -451,27 +479,27 @@ function makeWorld(level) {
           break;
         
         case "border":
-          sprite = g.rectangle();
+          sprite = g.rectangle( level.tilewidth, level.tileheight );
           sprite.fillStyle = "black";
           sprite.x = cell.x * level.tilewidth;
           sprite.y = cell.y * level.tileheight;
-          sprite.width = level.tilewidth;
-          sprite.height = level.tileheight;
+          //sprite.width = level.tilewidth;
+          //sprite.height = level.tileheight;
           world.platforms.push(sprite);
           break;
       }
     });
     //Make the game items. (Do this after the terrain so
     //that the items sprites display above the terrain sprites)
-    world.map.forEach(function(cell) {
+    world.map.forEach((cell) => {
       //Each game object will be half the size of the cell.
       //They should be centered and positioned so that they align
       //with the bottom of cell
       if(cell.item !== "") {
-        var sprite,
-            frame,
-            x = cell.x * level.tilewidth + level.tilewidth / 4;
-            y = cell.y * level.tileheight + level.tilewidth / 2;
+        let sprite:Player,
+            frame:GA.Frame,
+            x = cell.x * level.tilewidth + level.tilewidth / 4,
+            y = cell.y * level.tileheight + level.tilewidth / 2,
             width = level.tilewidth / 2,
             height = level.tileheight / 2;
         

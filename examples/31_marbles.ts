@@ -26,8 +26,23 @@ g.start();
 
 //Declare global sprites, objects, and variables
 //that you want to access in all the game functions and states
+interface Marble extends GA.Circle {
+  frictionX:number;
+  frictionY:number;
+  mass:number;
 
-var sling, marbles, capturedMarble;
+}
+interface Sling extends GA.Line {
+  length:number;
+  angle:number;
+}
+
+// Typed Group
+interface Marbles extends GA.Group {
+  children:[Marble];
+}
+  
+var sling:Sling, marbles:Marbles, capturedMarble:Marble|null;
 
 //A `setup` function that will run only once.
 //Use it for initialization tasks
@@ -66,9 +81,9 @@ function setup() {
     5, 5, 64, 64, 
     true, 0, 0,
     //A function that describes how to make each peg in the grid
-    function() {
-      var frames = g.filmstrip("images/marbles.png", 32, 32)
-      var marble = g.sprite(frames);
+    () => {
+      let frames = g.filmstrip("images/marbles.png", 32, 32)
+      let marble:Marble = g.sprite(frames);
       marble.show(g.randomInt(0, 5));
       marble.circular = true;
       var sizes = [8, 12, 16, 20, 24, 28, 32];
@@ -81,7 +96,7 @@ function setup() {
       return marble;
     },
     //Run any extra code after each peg is made, if you want to
-    function() {console.log("extra!");}
+    () => {console.log("extra!");}
   );
 
   //Create the "sling" which is a line that will connect
@@ -128,7 +143,7 @@ function play() {
   }
 
 
-  marbles.children.forEach(function(marble) {
+  marbles.children.forEach((marble) =>{
     //Check for a collision with the pointer and marble
     if (g.pointer.isDown && capturedMarble === null) {
       if (g.hit(g.pointer, marble)) {

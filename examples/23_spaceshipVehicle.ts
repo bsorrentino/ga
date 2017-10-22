@@ -2,8 +2,6 @@
 
 // Spaceship vehicle
 
-
-
 /// <reference path="../ga.plugins.d.ts" />  
 
 (function () {
@@ -14,13 +12,22 @@ Learn how to create a generic spaceship vehicle.
 
 //Create a new GA instance, and start it.
 
-var g = ga(256, 256, setup, ["fonts/puzzler.otf"]);
+let g = ga(256, 256, setup, ["fonts/puzzler.otf"]);
 g.start();
 
 //Declare global sprites, objects, and variables
 //that you want to access in all the game functions and states
 
-var ship, message;
+interface Ship extends GA.Group {
+  accelerationX:number;
+  accelerationY:number;
+  frictionX:number;
+  frictionY:number;
+  rotationSpeed:number;
+  moveForward:boolean;
+}
+
+var ship:Ship, message:GA.Text;
 
 //A `setup` function that will run only once.
 //Use it for initialization tasks
@@ -57,34 +64,27 @@ function setup() {
   
   //Set the ship's `rotationSpeed` to -0.1 (to rotate left) if the
   //left arrow key is being pressed
-  g.key.leftArrow.press = function() {
-    ship.rotationSpeed = -0.1;
-  };
+  g.key.leftArrow.press = () => ship.rotationSpeed = -0.1;
 
   //If the left arrow key is released and the right arrow
   //key isn't being pressed down, set the `rotationSpeed` to 0
-  g.key.leftArrow.release = function() {
+  g.key.leftArrow.release = () => {
     if (!g.key.rightArrow.isDown) ship.rotationSpeed = 0;
   };
 
   //Do the same for the right arrow key, but set
   //the `rotationSpeed` to 0.1 (to rotate right)
-  g.key.rightArrow.press = function() {
-    ship.rotationSpeed = 0.1;
-  };
+  g.key.rightArrow.press = () => ship.rotationSpeed = 0.1;
 
-  g.key.rightArrow.release = function() {
+
+  g.key.rightArrow.release = () => {
     if (!g.key.leftArrow.isDown) ship.rotationSpeed = 0;
   };
 
   //Set `ship.moveForward` to `true` if the up arrow key is
   //pressed, and set it to `false` if it's released
-  g.key.upArrow.press = function() {
-    ship.moveForward = true;
-  };
-  g.key.upArrow.release = function() {
-    ship.moveForward = false;
-  };
+  g.key.upArrow.press = () => ship.moveForward = true;
+  g.key.upArrow.release = () => ship.moveForward = false;
 
   //Make a text sprite
   message = g.text("", "12px puzzler", "black", 8, 8);
@@ -119,7 +119,7 @@ function play() {
   ship.y += ship.vy;
 
   //Display the ship's angle of rotation
-  message.content = ship.rotation;
+  message.content = String(ship.rotation);
 
 }
 
