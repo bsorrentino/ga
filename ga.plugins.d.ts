@@ -89,6 +89,11 @@ export interface Sound  {
     loop:boolean;
 
     /**
+     * 
+     */
+    playing:boolean;
+
+    /**
      * You can set the sound object's pan by assigning a value between -1 (left speaker) to 1 (right speaker).
      * A pan value of 0 makes the sound equal volume in both speakers.
      */
@@ -582,13 +587,13 @@ walkPath(
 /**
  * A function for making sprites shoot bullets.
  */
-shoot(
+shoot<T extends DisplayableObject>(
     shooter:DisplayableObject,
     angle:number,
     offsetFromCenter:number,
     bulletSpeed:number,
     bulletArray:DisplayableObject[],
-    bulletSprite:()=>DisplayableObject):void;
+    bulletSprite:()=>DisplayableObject):T;
 
 /**
  * Create the grid of pegs using the `grid` function.
@@ -1149,6 +1154,62 @@ makeSound(source:string, loadHandler:()=>void):Sound;
  */
 sound(asset:string):Sound;
 
+/*
+ *   The `soundEffect` function lets you generate your sounds and musical notes from scratch
+ *   (Reverb effect requires the `impulseResponse` function that you'll see further ahead in this file)
+ * 
+ *   To create a custom sound effect, define all the parameters that characterize your sound. Here's how to
+ *   create a laser shooting sound:
+ * 
+ *       soundEffect(
+ *         1046.5,           //frequency
+ *         0,                //attack
+ *         0.3,              //decay
+ *         "sawtooth",       //waveform
+ *         1,                //Volume
+ *         -0.8,             //pan
+ *         0,                //wait before playing
+ *         1200,             //pitch bend amount
+ *         false,            //reverse bend
+ *         0,                //random pitch range
+ *         25,               //dissonance
+ *         [0.2, 0.2, 2000], //echo: [delay, feedback, filter]
+ *         undefined         //reverb: [duration, decay, reverse?]
+ *       );
+ * 
+ *   Experiment by changing these parameters to see what kinds of effects you can create, and build
+ *   your own library of custom sound effects for games.
+ * 
+ * @param frequencyValue   The sound's fequency pitch in Hertz
+ * @param attack           The time, in seconds, to fade the sound in
+ * @param decay            The time, in seconds, to fade the sound out
+ * @param type             waveform type: "sine", "triangle", "square", "sawtooth"
+ * @param volumeValue      The sound's maximum volume
+ * @param panValue         The speaker pan. left: -1, middle: 0, right: 1
+ * @param wait             The time, in seconds, to wait before playing the sound
+ * @param pitchBendAmount  The number of Hz in which to bend the sound's pitch down
+ * @param reverse          is true the pitch will bend up
+ * @param randomValue      A range, in Hz, within which to randomize the pitch
+ * @param dissonance       A value in Hz. It creates 2 dissonant frequencies above and below the target pitch
+ * @param echo             An array: [delayTimeInSeconds, feedbackTimeInSeconds, filterValueInHz]
+ * @param reverb           An array: [durationInSeconds, decayRateInSeconds, reverse]
+ * 
+ */
+soundEffect(
+    frequencyValue?:number,
+    attack?:number,
+    decay?:number,
+    type?:"sine"|"triangle"|"square"|"sawtooth",
+    volumeValue?:number,
+    panValue?:number,
+    wait?:number,
+    pitchBendAmount?:number,
+    reverse?:boolean,
+    randomValue?:number,
+    dissonance?:number,
+    echo?:[number,number,number],
+    reverb?:[number,number,number]
+  ):void;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////

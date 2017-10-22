@@ -25,7 +25,7 @@ g.start();
 //Declare global sprites, objects, and variables
 //that you want to access in all the game functions and states
 
-var fairy;
+var fairy:GA.Sprite;
 
 //A `setup` function that will run only once.
 //Use it for initialization tasks

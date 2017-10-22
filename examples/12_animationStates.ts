@@ -3,13 +3,13 @@
 // Animtation states
 
 
-/// <reference path="../ga.plugins.d.ts" />  
+/// <reference path="../ga.d.ts" />  
 
 (function () {
 
 //Create a new GA instance, and start it.
 //Pre-load images in the array.
-var g = ga(
+let g = ga(
   256, 256, setup, 
   [
     "images/forest.png",
@@ -18,10 +18,28 @@ var g = ga(
 );
 g.start();
 
+interface Elf extends GA.Sprite {
+
+  states:{
+    up:number,
+    left:number,
+    down:number,
+    right:number,
+    walkUp: [number, number],
+    walkLeft: [number, number],
+    walkDown: [number, number],
+    walkRight: [number, number]
+  };
+}
 //Declare global sprites, objects, and variables
 //that you want to access in all the game functions and states
 
-var elf, forest, leftArrow, upArrow, downArrow, rightArrow;
+var elf:Elf, 
+    forest:GA.Sprite, 
+    leftArrow:GA.KeyHandler, 
+    upArrow:GA.KeyHandler, 
+    downArrow:GA.KeyHandler, 
+    rightArrow:GA.KeyHandler;
 
 //A `setup` function that will run only once.
 //Use it for initialization tasks
@@ -86,45 +104,45 @@ function setup() {
   
   //Assign key `press` and release methods that
   //show and play the elf's different states
-  leftArrow.press = function() {
+  leftArrow.press = () =>  {
     elf.playSequence(elf.states.walkLeft);
     elf.vx = -1;
     elf.vy = 0;
   };
-  leftArrow.release = function() {
+  leftArrow.release = () =>  {
     if (!rightArrow.isDown && elf.vy === 0) {
       elf.vx = 0;
       elf.show(elf.states.left);
     }
   };
-  upArrow.press = function() {
+  upArrow.press = () =>  {
     elf.playSequence(elf.states.walkUp);
     elf.vy = -1;
     elf.vx = 0;
   };
-  upArrow.release = function() {
+  upArrow.release = () =>  {
     if (!downArrow.isDown && elf.vx === 0) {
       elf.vy = 0;
       elf.show(elf.states.up);
     }
   };
-  rightArrow.press = function() {
+  rightArrow.press = () =>  {
     elf.playSequence(elf.states.walkRight);
     elf.vx = 1;
     elf.vy = 0;
   };
-  rightArrow.release = function() {
+  rightArrow.release = () =>  {
     if (!leftArrow.isDown && elf.vy === 0) {
       elf.vx = 0;
       elf.show(elf.states.right);
     }
   };
-  downArrow.press = function() {
+  downArrow.press = () =>  {
     elf.playSequence(elf.states.walkDown);
     elf.vy = 1;
     elf.vx = 0;
   };
-  downArrow.release = function() {
+  downArrow.release = () =>  {
     if (!upArrow.isDown && elf.vx === 0) {
       elf.vy = 0;
       elf.show(elf.states.down);

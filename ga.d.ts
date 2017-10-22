@@ -383,6 +383,19 @@ export interface Engine {
     frames(source:string, arrayOfPositions:Array<[number,number]>, width:number, height:number):Frames;
 
     /**
+     * 
+     * If you have a complex animation in a single image, you can use the
+     * `filmstrip` method to automatically create an array of x,y
+     * coordinates for each animation frame.
+     * 
+     * @param imageName 
+     * @param frameWidth
+     * @param frameHeight
+     * @param spacing should be included if there's any default spacing (padding) around tileset images.
+     */
+    filmstrip(imageName:string, frameWidth:number, frameHeight:number, spacing?:number):Frames;
+    
+    /**
      *
      */
     rectangle<T extends Rectangle>( widthPx:number, heightPx:number, fillColor?:string, strokeColor?:string, lineWidth?:number, x?:number, y?:number ):T;
@@ -425,7 +438,7 @@ export interface Engine {
     /**
      * An interactive button with `up` `over` and `down` states. Optional `press` and `release` actions.
      */
-    button(source:Array<string>|string):Sprite ;
+    button(source:Array<string>|string|Frame|Frames):Sprite ;
 
 }
 

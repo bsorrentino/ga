@@ -71,20 +71,18 @@ all-purpose `particleEffect` function to simulate everything from liquid to fire
 
 //Create a new GA instance, and start it.
 //Pre-load images in the array.
-var g = ga(256, 256, setup, ["images/star.png"]);
+let g = ga(256, 256, setup, ["images/star.png"]);
 g.start();
 
 //A `setup` function that will run only once.
 //Use it for initialization tasks
 function setup() {
 
-  g.pointer.press = function(){
+  g.pointer.press = () => 
     g.particleEffect(
       g.pointer.x,                             //start x position
       g.pointer.y,                             //start y position
-      function(){                              //Particle function
-        return g.sprite("images/star.png");
-      }, 
+      () => g.sprite("images/star.png"),       //Particle function
       20,                                      //Number of particles
       0.1,                                     //Gravity
       true,                                    //Random spacing
@@ -94,8 +92,8 @@ function setup() {
       0.005, 0.01,                             //Min/max scale speed
       0.005, 0.01,                             //Min/max alpha speed
       0.05, 0.1                                //Min/max rotation speed
-    );
-  };
+    )
+  ;
 
   //Set the game state to `play`
   g.state = play;    

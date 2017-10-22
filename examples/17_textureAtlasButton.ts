@@ -21,7 +21,7 @@ g.start();
 //Declare global sprites, objects, and variables
 //that you want to access in all the game functions and states
 
-var button, stateMessage, actionMessage;
+var button:GA.Sprite, stateMessage:GA.Text, actionMessage:GA.Text;
 
 //A `setup` function that will run only once.
 //Use it for initialization tasks

@@ -27,7 +27,7 @@ Let's find out how it all works:
 
 //First, create a new GA instance, and start it.
 //Pre-load sounds in the constructor array.
-var g = ga(
+let g = ga(
   256, 350, setup, 
   [
     "sounds/shoot.wav",
@@ -63,7 +63,7 @@ function setup() {
   music.volume = 0.3;
 
   //Create the keyboard objects to play the sounds
-  var one = g.keyboard(49),
+  let one = g.keyboard(49),
       a = g.keyboard(65),
       b = g.keyboard(66),
       c = g.keyboard(67),
@@ -76,26 +76,26 @@ function setup() {
       j = g.keyboard(74);
 
   //Create `press` actions for each sound 
-  one.press = function(){
+  one.press = () => {
     shoot.play();
   };
-  a.press = function(){
+  a.press = () => {
     //Allow the music to start playing only once
     if (!music.playing) music.play(); 
   };
-  b.press = function(){
+  b.press = () => {
     music.pause();
   };
-  c.press = function(){
+  c.press = () => {
     music.restart();
   };
-  d.press = function(){
+  d.press = () => {
     music.playFrom(10);
   };
-  e.press = function(){
+  e.press = () => {
     music.fadeOut(3);
   };
-  f.press = function(){
+  f.press = () => {
     music.fadeIn(3);
   };
 
@@ -172,32 +172,32 @@ function setup() {
   }
  
   //Program keyboard keys to play the sounds.
-  gee.press = function(){ shootSound() };
-  h.press = function(){ jumpSound() };
-  i.press = function(){ explosionSound() };
-  j.press = function(){ bonusSound() };
+  gee.press = () => { shootSound() };
+  h.press = () => { jumpSound() };
+  i.press = () => { explosionSound() };
+  j.press = () => { bonusSound() };
 
   //Ga doesn't have multi-line support for text (yet!) so let's
   //do it caveman-style for now:
 
   //Define the font and color
-  var f = "10px PetMe64";
-  var c = "YellowGreen";
+  const ff = "10px PetMe64";
+  const cc = "YellowGreen";
 
   //Create each line of text
-  g.text("To shoot, press 1", f, c, 10, 10);
-  g.text("To control music:", f, c, 10, 50);
-  g.text("a - Play", f, c, 10, 70);
-  g.text("b - Pause", f, c, 10, 90);
-  g.text("c - Restart", f, c, 10, 110);
-  g.text("d - Go to 10 sec. mark", f, c, 10, 130);
-  g.text("e - Fade out", f, c, 10, 150);
-  g.text("f - Fade in", f, c, 10, 170);
-  g.text("Generated sound effects:", f, c, 10, 210);
-  g.text("g - Shoot sound", f, c, 10, 230);
-  g.text("h - Jump sound", f, c, 10, 250);
-  g.text("i - Explosion sound", f, c, 10, 270);
-  g.text("j - Bonus sound", f, c, 10, 290);
+  g.text("To shoot, press 1", ff, cc, 10, 10);
+  g.text("To control music:", ff, cc, 10, 50);
+  g.text("a - Play", ff, cc, 10, 70);
+  g.text("b - Pause", ff, cc, 10, 90);
+  g.text("c - Restart", ff, cc, 10, 110);
+  g.text("d - Go to 10 sec. mark", ff, cc, 10, 130);
+  g.text("e - Fade out", ff, cc, 10, 150);
+  g.text("f - Fade in", ff, cc, 10, 170);
+  g.text("Generated sound effects:", ff, cc, 10, 210);
+  g.text("g - Shoot sound", ff, cc, 10, 230);
+  g.text("h - Jump sound", ff, cc, 10, 250);
+  g.text("i - Explosion sound", ff, cc, 10, 270);
+  g.text("j - Bonus sound", ff, cc, 10, 290);
 
   //g.state = play;    
 }

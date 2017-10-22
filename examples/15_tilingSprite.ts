@@ -1,8 +1,4 @@
- 
-
 // Tiling sprites
-
-
 
 /// <reference path="../ga.plugins.d.ts" />  
 
@@ -17,7 +13,7 @@ stop the particle stream.
 
 //Create a new GA instance, and start it.
 //Pre-load images in the array.
-var g = ga(256, 256, setup, 
+let g = ga(256, 256, setup, 
   [
     "images/tile.png", 
     "images/animals.json"
@@ -27,7 +23,7 @@ g.start();
 
 //Declare global sprites, objects, and variables
 //that you want to access in all the game functions and states
-var box;
+var box:GA.TilingSprite;
 
 //A `setup` function that will run only once.
 //Use it for initialization tasks

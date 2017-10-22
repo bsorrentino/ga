@@ -14,7 +14,7 @@ states: up, over and down.
 
 //Create a new GA instance, and start it.
 //Pre-load images in the array.
-var g = ga(
+let g = ga(
   256, 256, setup, 
   [
     "images/button.png",
@@ -26,7 +26,7 @@ g.start();
 //Declare global sprites, objects, and variables
 //that you want to access in all the game functions and states
 
-var button, stateMessage, actionMessage;
+var button:GA.Sprite, stateMessage:GA.Text, actionMessage:GA.Text;
 
 //A `setup` function that will run only once.
 //Use it for initialization tasks
@@ -47,19 +47,19 @@ function setup() {
 
   //Assign the button's optional and customizable `press`, `release`, 
   //`over`, `out` and `tap` actions
-  button.press = function() {
+  button.press = () =>  {
     console.log("pressed");
   };
-  button.release = function() {
+  button.release = () =>  {
     console.log("released");
   };
-  button.over = function() {
+  button.over = () =>  {
     console.log("over");
   };
-  button.out = function() {
+  button.out = () =>  {
     console.log("out");
   };
-  button.tap = function() {
+  button.tap = () =>  {
     console.log("tapped");
   };
 
