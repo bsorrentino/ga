@@ -45,6 +45,8 @@ export interface DisplayableObject  {
 
     layer:number;
 
+    draggable:boolean;
+    
     readonly gx:number;
     readonly gy:number;
     readonly halfWidth:number;
