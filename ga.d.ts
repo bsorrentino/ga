@@ -1,14 +1,14 @@
 
 declare namespace GA {
 
-export type Coordinate = { x:number, y:number };
+type Coordinate = { x:number, y:number };
 
-export type Bounds = { x:number, y:number, width:number, height:number };
+type Bounds = { x:number, y:number, width:number, height:number };
 
 /**
  *
  */
-export interface KeyHandler {
+interface KeyHandler {
 
     readonly code:number;
     readonly isDown:boolean;
@@ -20,7 +20,7 @@ export interface KeyHandler {
 /**
  *
  */
-export interface DisplayableObject  {
+interface DisplayableObject  {
     x:number;
     y:number;
 
@@ -78,11 +78,13 @@ export interface DisplayableObject  {
 
     children:DisplayableObject[];
 
-    addChild(sprite:DisplayableObject):void;
-    removeChild(sprite:DisplayableObject):void;
+    addChild<T extends DisplayableObject>(sprite:T):void;
+    removeChild<T extends DisplayableObject>(sprite:T):void;
 
-    add(...sprites: DisplayableObject[]):void;
-    remove(...sprites: DisplayableObject[]):void;
+    add<T extends DisplayableObject>(...sprites: T[]):void;
+    remove<T extends DisplayableObject>(...sprites: T[]):void;
+
+    readonly empty:boolean;
 
     // Sahdow
     shadow:boolean;
@@ -100,11 +102,10 @@ export interface DisplayableObject  {
 }
 
 /**
- *
+ * Generic Group
  */
-export interface Group extends DisplayableObject {
+type Group = DisplayableObject;
 
-}
 
 interface InteractiveFeature  {
   interactive:boolean;
@@ -173,7 +174,7 @@ interface Sprite extends InteractiveFeature,DisplayableObject {
 }
 
 
-export interface Line extends DisplayableObject {
+interface Line extends DisplayableObject {
     ax:number;
     ay:number;
     bx:number;
@@ -190,11 +191,11 @@ export interface Line extends DisplayableObject {
 
 }
 
-export interface Text extends DisplayableObject {
+interface Text extends DisplayableObject {
     content:string;
 }
 
-export interface Rectangle extends Sprite {
+interface Rectangle extends Sprite {
     mask:boolean;
 
     fillStyle:string;
@@ -208,7 +209,7 @@ export interface Rectangle extends Sprite {
     //rotate:number;
 }
 
-export interface Circle extends Sprite {
+interface Circle extends Sprite {
 
     mask:boolean;
 
@@ -218,7 +219,7 @@ export interface Circle extends Sprite {
     radius:number;
 }
 
-export interface Stage extends Sprite {
+interface Stage extends Sprite {
     
     swapChildren( child1:DisplayableObject, child2:DisplayableObject):void
 }
@@ -265,7 +266,7 @@ interface Frames extends Bounds {
 /**
  *
  */
-export interface Engine {
+interface Engine {
 
     ( heightPx:number, widthPx:number, initialState:Function, assets?:Array<string>, load?:Function ):Engine;
     /**
