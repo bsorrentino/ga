@@ -1,0 +1,48 @@
+{
+  "name": "kka-ga",
+  "version": "0.0.3",
+  "description": "The world's tiniest, cutest and funnest game engine",
+  "homepage": "https://github.com/kittykatattack/ga#readme",
+  "main": "ga.js",
+  "directories": {
+    "example": "examples",
+    "tutorial": "tutorials"
+  },
+  "scripts": {
+    "doc": "typedoc --includedeclarations --excludeExternals --out ./docs ga.d.ts ga.plugins.d.ts"
+  },
+  "keywords": [
+    "Typescript",
+    "Javascript",
+    "Game Engine"
+  ],
+  "author": { 
+    "name": "Rex van der Spuy",
+    "url":"https://github.com/kittykatattack"
+  },
+  "contributors": [
+    { 
+      "name": "Rex van der Spuy",
+      "url":"https://github.com/kittykatattack"
+    },
+    {
+      "name": "Bartolomeo Sorrentino",
+      "email": "bartolomeo.sorrentino@gmail.com",
+      "url": "https://github.com/bsorrentino"
+    }
+  ],
+  "license": "UNLICENSED",
+  "bugs": {
+    "url":"https://github.com/kittykatattack/ga/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bsorrentino/ga"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-uglify": "^0.8.0",
+    "typedoc": "^0.9.0"
+  },
+  "dependencies": {}
+}
