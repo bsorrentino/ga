@@ -1,10 +1,11 @@
 {
   "name": "kka-ga",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The world's tiniest, cutest and funnest game engine",
   "main": "ga.js",
   "directories": {
-    "example": "examples"
+    "example": "examples",
+    "tutorial": "tutorials"
   },
   "scripts": {
     "doc": "typedoc --includedeclarations --excludeExternals --out ./docs ga.d.ts ga.plugins.d.ts"
@@ -14,7 +15,10 @@
     "Javascript",
     "Game Engine"
   ],
-  "author": "Rex van der Spuy",
+  "author": { 
+    "name": "Rex van der Spuy",
+    "url":"https://github.com/kittykatattack"
+  },
   "contributors": [
     {
       "name": "Bartolomeo Sorrentino",
