@@ -1,5 +1,7 @@
 ![Ga](/tutorials/screenshots/logoAndIllustration.png)
 
+[![npm](https://img.shields.io/npm/v/kka-ga.svg)](https://www.npmjs.com/package/kka-ga)
+
 Ga
 ===
 
