@@ -1,5 +1,5 @@
 {
-  "name": "Ga!",
+  "name": "kka-ga",
   "version": "0.0.1",
   "description": "The world's tiniest, cutest and funnest game engine",
   "main": "ga.js",
@@ -10,15 +10,23 @@
     "doc": "typedoc --includedeclarations --excludeExternals --out ./docs ga.d.ts ga.plugins.d.ts"
   },
   "keywords": [
+    "Typescript",
     "Javascript",
     "Game Engine"
   ],
   "author": "Rex van der Spuy",
-  "license": "Ga is vehemently unlicenesed",
+  "contributors": [
+    {
+      "name": "Bartolomeo Sorrentino",
+      "email": "bartolomeo.sorrentino@gmail.com",
+      "url": "https://github.com/bsorrentino"
+    }
+  ],
+  "license": "UNLICENSED",
   "bugs": "https://github.com/kittykatattack/ga/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kittykatattack/ga.git"
+    "url": "https://github.com/bsorrentino/ga.it"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
