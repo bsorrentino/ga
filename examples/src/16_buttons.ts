@@ -3,7 +3,7 @@
 // Buttons
 
 
-/// <reference path="../ga.plugins.d.ts" />  
+/// <reference path="../../ga.plugins.d.ts" />  
 
 (function () {
 
@@ -17,8 +17,8 @@ states: up, over and down.
 let g = ga(
   256, 256, setup, 
   [
-    "images/button.png",
-    "fonts/puzzler.otf"
+    "assets/images/button.png",
+    "assets/fonts/puzzler.otf"
   ]
 );
 g.start();
@@ -37,7 +37,7 @@ function setup() {
 
   //Create the button's three image states using the `frames` method
   var buttonFrames = g.frames(
-    "images/button.png",       //The tileset image
+    "assets/images/button.png",       //The tileset image
     [[0,0],[0,96],[0,192]],    //The `x` and `y` positions of frames
     192, 96                    //The `width` and `height` of each frame
   );

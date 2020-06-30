@@ -4,7 +4,7 @@
 
 
 
-/// <reference path="../ga.plugins.d.ts" />  
+/// <reference path="../../ga.plugins.d.ts" />  
 
 (function () {
 
@@ -43,8 +43,8 @@ both have custom `name` properties: "alien" and "bomb".
 
 var g = ga(512, 512, setup, 
   [
-    "images/timeBombPanic.png",
-    "maps/timeBombPanic.json"
+    "assets/images/timeBombPanic.png",
+    "assets/maps/timeBombPanic.json"
   ]
 );
 g.start();
@@ -66,8 +66,8 @@ function setup() {
 
   //Make the world from the Tiled JSON data and the tileset PNG image
   world = g.makeTiledWorld(
-    "maps/timeBombPanic.json", 
-    "images/timeBombPanic.png"
+    "assets/maps/timeBombPanic.json", 
+    "assets/images/timeBombPanic.png"
   );
     
   /*

@@ -12,8 +12,8 @@
 let g = ga(
   256, 256, setup, 
   [
-    "images/forest.png",
-    "images/walkcycle.png"
+    "assets/images/forest.png",
+    "assets/images/walkcycle.png"
   ]
 );
 g.start();
@@ -46,7 +46,7 @@ var elf:Elf,
 function setup() {
 
   //Make the forest background
-  forest = g.sprite("images/forest.png");
+  forest = g.sprite("assets/images/forest.png");
 
   /*
   If you have a complex animation made up of sequential 
@@ -59,7 +59,7 @@ function setup() {
   spacing (padding) around tileset frame images)
   */
 
-  var walkingAnimation = g.filmstrip("images/walkcycle.png", 64, 64);
+  var walkingAnimation = g.filmstrip("assets/images/walkcycle.png", 64, 64);
 
   //Now initialize the sprite with the film strip to create a sprite
   elf = g.sprite(walkingAnimation);

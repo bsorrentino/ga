@@ -2,7 +2,7 @@
 
 // Platforms
 
-/// <reference path="../ga.plugins.d.ts" />  
+/// <reference path="../../ga.plugins.d.ts" />  
 
 (function () {
 
@@ -19,8 +19,8 @@ This file requires these convenience functions from `plugins.js`:
 var g = ga(
   512, 512, setup, 
   [
-    "images/platforms.png",
-    "fonts/puzzler.otf"
+    "assets/images/platforms.png",
+    "assets/fonts/puzzler.otf"
   ]
 );
 g.start();
@@ -69,7 +69,7 @@ const level = {
   //an image
   tileset: { 
     //The source image
-    source: "images/platforms.png",
+    source: "assets/images/platforms.png",
     //The x/y coordinates for the sprites on the tileset
     player: [32, 32],
     treasure: [32, 0],
@@ -505,7 +505,7 @@ function makeWorld():World {
         
         switch (cell.item) {
           case "player":
-            frame = g.frame("images/platforms.png", 32, 32, 32, 32);
+            frame = g.frame("assets/images/platforms.png", 32, 32, 32, 32);
             sprite = g.sprite(frame);
             sprite.width = width;
             sprite.height = height;
@@ -523,7 +523,7 @@ function makeWorld():World {
             break;
           
           case "treasure":
-            frame = g.frame("images/platforms.png", 32, 0, 32, 32);
+            frame = g.frame("assets/images/platforms.png", 32, 0, 32, 32);
             sprite = g.sprite(frame);
             sprite.width = width;
             sprite.height = height;

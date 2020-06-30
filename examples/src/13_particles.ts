@@ -3,7 +3,7 @@
 // Particles
 
 
-/// <reference path="../ga.plugins.d.ts" />  
+/// <reference path="../../ga.plugins.d.ts" />  
 
 (function () {
 
@@ -71,7 +71,7 @@ all-purpose `particleEffect` function to simulate everything from liquid to fire
 
 //Create a new GA instance, and start it.
 //Pre-load images in the array.
-let g = ga(256, 256, setup, ["images/star.png"]);
+let g = ga(256, 256, setup, ["assets/images/star.png"]);
 g.start();
 
 //A `setup` function that will run only once.
@@ -80,18 +80,18 @@ function setup() {
 
   g.pointer.press = () => 
     g.particleEffect(
-      g.pointer.x,                             //start x position
-      g.pointer.y,                             //start y position
-      () => g.sprite("images/star.png"),       //Particle function
-      20,                                      //Number of particles
-      0.1,                                     //Gravity
-      true,                                    //Random spacing
-      0, 6.28,                                 //Min/max angle
-      12, 24,                                  //Min/max size
-      1, 2,                                    //Min/max speed
-      0.005, 0.01,                             //Min/max scale speed
-      0.005, 0.01,                             //Min/max alpha speed
-      0.05, 0.1                                //Min/max rotation speed
+      g.pointer.x,                              //start x position
+      g.pointer.y,                              //start y position
+      () => g.sprite("assets/images/star.png"), //Particle function
+      20,                                       //Number of particles
+      0.1,                                      //Gravity
+      true,                                     //Random spacing
+      0, 6.28,                                  //Min/max angle
+      12, 24,                                   //Min/max size
+      1, 2,                                     //Min/max speed
+      0.005, 0.01,                              //Min/max scale speed
+      0.005, 0.01,                              //Min/max alpha speed
+      0.05, 0.1                                 //Min/max rotation speed
     )
   ;
 

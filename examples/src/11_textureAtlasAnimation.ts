@@ -14,7 +14,7 @@ This file requires these convenience functions from `plugins.js`:
 var g = ga(
   256, 256, setup, 
   [
-    "images/fairy.json"
+    "assets/images/fairy.json"
   ]
 );
 g.start();

@@ -1,6 +1,6 @@
 // Tiling sprites
 
-/// <reference path="../ga.plugins.d.ts" />  
+/// <reference path="../../ga.plugins.d.ts" />  
 
 (function () {
 /*
@@ -15,8 +15,8 @@ stop the particle stream.
 //Pre-load images in the array.
 let g = ga(256, 256, setup, 
   [
-    "images/tile.png", 
-    "images/animals.json"
+    "assets/images/tile.png", 
+    "assets/images/animals.json"
   ]
 );
 g.start();
@@ -29,7 +29,7 @@ var box:GA.TilingSprite;
 //Use it for initialization tasks
 function setup() {
 
-  box = g.tilingSprite(128, 128, "images/tile.png");
+  box = g.tilingSprite(128, 128, "assets/images/tile.png");
 
   //It also works with texture atlas frames
   //box = g.tilingSprite(128, 128, "cat.png");

@@ -11,7 +11,7 @@ This file requires these convenience functions from `plugins.js`:
 //Create a new GA instance, and start it.
 //Pre-load images in the array.
 
-var g = ga(256, 256, setup, ["images/platforms.png"]);
+var g = ga(256, 256, setup, ["assets/images/platforms.png"]);
 g.start();
 
 //Declare global sprites, objects, and variables
@@ -28,7 +28,7 @@ function setup() {
   g.canvas.style.border = "1px black dashed";
 
   //Make a sprite from a tileset
-  cat = g.sprite(g.frame("images/platforms.png", 32, 32, 32, 32));
+  cat = g.sprite(g.frame("assets/images/platforms.png", 32, 32, 32, 32));
 
   //Center the cat
   g.stage.putCenter(cat);

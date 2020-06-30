@@ -1,7 +1,7 @@
  
 // Tweening
 
-/// <reference path="../ga.plugins.d.ts" />  
+/// <reference path="../../ga.plugins.d.ts" />  
 
 (function () {
 
@@ -16,7 +16,7 @@ to use them.
 let g = ga(
   1024, 512, setup, 
   [
-    "images/animals.json"
+    "assets/images/animals.json"
   ]
 );
 g.start();

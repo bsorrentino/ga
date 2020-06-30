@@ -19,7 +19,7 @@ This file requires these convenience functions from `plugins.js`:
 var g = ga(
   256, 256, setup, 
   [
-    "fonts/puzzler.otf"
+    "assets/fonts/puzzler.otf"
   ]
 );
 g.start();

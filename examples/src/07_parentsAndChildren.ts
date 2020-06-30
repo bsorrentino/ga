@@ -12,7 +12,7 @@ This file requires these convenience functions from `plugins.js`:
 //Create a new GA instance, and start it.
 //Pre-load images in the array.
 
-var g = ga(256, 256, setup, ["images/platforms.png"]);
+var g = ga(256, 256, setup, ["assets/images/platforms.png"]);
 g.start();
 
 interface Star extends GA.Sprite {
@@ -60,7 +60,7 @@ function setup() {
   g.stage.putCenter(square);
 
   //Make the cat sprite from a tileset
-  cat = g.sprite(g.frame("images/platforms.png", 32, 32, 32, 32));
+  cat = g.sprite(g.frame("assets/images/platforms.png", 32, 32, 32, 32));
   cat.shadow = true;
 
   //Control the cat with the keyboard
@@ -84,7 +84,7 @@ function setup() {
   localMessage.y = 2;
 
   //Make a star sprite and add it as a child of the cat
-  star = g.sprite(g.frame("images/platforms.png", 32, 0, 32, 32));
+  star = g.sprite(g.frame("assets/images/platforms.png", 32, 0, 32, 32));
 
   //Scale the star's size down to 50%
   star.scaleX = 0.5;

@@ -8,7 +8,7 @@
 //Create a new GA instance, and start it.
 //Pre-load a texture atlas called `animals.json` from the `images`
 //folder.
-var g = ga( 256, 256, setup, ["images/animals.json"]);
+var g = ga( 256, 256, setup, ["assets/images/animals.json"]);
 g.start();
 
 //Declare global sprites, objects, and variables

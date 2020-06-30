@@ -4,7 +4,7 @@
 
 
 
-/// <reference path="../ga.plugins.d.ts" />  
+/// <reference path="../../ga.plugins.d.ts" />  
 
 (function () {
 
@@ -46,10 +46,10 @@ item positions.
 
 var g = ga(512, 512, setup, 
   [
-    "images/fantasy.png",
-    "images/walkcycle.png",
-    "fonts/puzzler.otf",
-    "maps/fantasy.json"
+    "assets/images/fantasy.png",
+    "assets/images/walkcycle.png",
+    "assets/fonts/puzzler.otf",
+    "assets/maps/fantasy.json"
   ]
 );
 g.start();
@@ -83,12 +83,12 @@ function setup() {
 
   //Make the world from the Tiled JSON data and the tileset PNG image
   world = g.makeTiledWorld(
-    "maps/fantasy.json", 
-    "images/fantasy.png"
+    "assets/maps/fantasy.json", 
+    "assets/images/fantasy.png"
   );
 
   //Create the elf sprite using a filmstrip of animation frames
-  elf = g.sprite(g.filmstrip("images/walkcycle.png", 64, 64));
+  elf = g.sprite(g.filmstrip("assets/images/walkcycle.png", 64, 64));
 
   /*
   Tiled Editor lets you create generic objects. Take a look at the

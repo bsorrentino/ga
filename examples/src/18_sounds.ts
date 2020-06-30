@@ -3,7 +3,7 @@
 // Sounds
 
 
-/// <reference path="../ga.plugins.d.ts" />  
+/// <reference path="../../ga.plugins.d.ts" />  
 
 (function () {
 
@@ -30,10 +30,10 @@ Let's find out how it all works:
 let g = ga(
   256, 350, setup, 
   [
-    "sounds/shoot.wav",
-    "sounds/music.wav",
-    "sounds/explosion.wav",
-    "fonts/PetMe64.ttf"
+    "assets/sounds/shoot.wav",
+    "assets/sounds/music.wav",
+    "assets/sounds/explosion.wav",
+    "assets/fonts/PetMe64.ttf"
   ]
 );
 g.start();
@@ -45,9 +45,9 @@ function setup() {
   //First, create some sound objects
   //Use the `sounds` method to create sound objects. The `sound`
   //method takes one argument: a string that describes the sound file path
-  var shoot = g.sound("sounds/shoot.wav"),
-      explosion = g.sound("sounds/explosion.wav"),
-      music = g.sound("sounds/music.wav");
+  var shoot = g.sound("assets/sounds/shoot.wav"),
+      explosion = g.sound("assets/sounds/explosion.wav"),
+      music = g.sound("assets/sounds/music.wav");
 
   //Next, setup the sounds
 

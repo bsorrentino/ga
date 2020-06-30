@@ -1,6 +1,6 @@
 // Particle emitter
 
-/// <reference path="../ga.plugins.d.ts" />  
+/// <reference path="../../ga.plugins.d.ts" />  
 
 (function () {
 
@@ -14,7 +14,7 @@ stop the particle stream.
 
 //Create a new GA instance, and start it.
 //Pre-load images in the array.
-let g = ga(256, 256, setup, ["images/star.png"]);
+let g = ga(256, 256, setup, ["assets/images/star.png"]);
 g.start();
 
 //A `setup` function that will run only once.
@@ -26,10 +26,10 @@ function setup() {
   var particleStream = g.emitter(
     100,                                           //The interval
     () => 
-      g.particleEffect(                     //The particle function
+      g.particleEffect(                            //The particle function
         g.pointer.x,                               //x position
         g.pointer.y,                               //y position
-        () => g.sprite("images/star.png"),         //Particle sprite
+        () => g.sprite("assets/images/star.png"),  //Particle sprite
         10,                                        //Number of particles
         0.1,                                       //Gravity
         false,                                     //Random spacing

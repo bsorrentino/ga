@@ -2,7 +2,7 @@
 
 // Bloxyee!
 
-/// <reference path="../ga.plugins.d.ts" />  
+/// <reference path="../../ga.plugins.d.ts" />  
 
 (function () {
 
@@ -19,10 +19,10 @@ This file requires these convenience functions from `plugins.js`
 var g = ga(
   512, 512, setup, 
   [
-    "images/bloxyee/bloxyee.json",
-    "fonts/puzzler.otf",
-    "sounds/music.wav",
-    "sounds/bounce.wav"
+    "assets/images/bloxyee/bloxyee.json",
+    "assets/fonts/puzzler.otf",
+    "assets/sounds/music.wav",
+    "assets/sounds/bounce.wav"
   ],
   load
 );
@@ -74,8 +74,8 @@ function setup() {
   g.backgroundColor = "white";
 
   //Sound and music
-  bounceSound = g.sound("sounds/bounce.wav");
-  music = g.sound("sounds/music.wav");
+  bounceSound = g.sound("assets/sounds/bounce.wav");
+  music = g.sound("assets/sounds/music.wav");
   music.loop = true;
 
   //Create the sprites

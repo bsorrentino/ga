@@ -12,9 +12,9 @@
 var g = ga(
   256, 256, setup, 
   [
-    "images/cat.png",
-    "images/tiger.png",
-    "images/hedgehog.png",
+    "assets/images/cat.png",
+    "assets/images/tiger.png",
+    "assets/images/hedgehog.png",
   ]
 );
 g.start();
@@ -32,14 +32,14 @@ function setup() {
   g.canvas.style.border = "1px black dashed";
 
   //Create three sprites from images and set their `draggable` property to `true`
-  cat = g.sprite("images/cat.png");
+  cat = g.sprite("assets/images/cat.png");
   cat.draggable = true;
 
-  tiger = g.sprite("images/tiger.png");
+  tiger = g.sprite("assets/images/tiger.png");
   tiger.draggable = true;
   tiger.setPosition(64, 64);
 
-  hedgehog = g.sprite("images/hedgehog.png");
+  hedgehog = g.sprite("assets/images/hedgehog.png");
   hedgehog.draggable = true;
   hedgehog.setPosition(128, 128);
 

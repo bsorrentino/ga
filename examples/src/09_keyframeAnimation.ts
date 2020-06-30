@@ -12,7 +12,7 @@ This file requires these convenience functions from `plugins.js`:
 var g = ga(
   256, 256, setup, 
   [
-    "images/buttonFairy.png"
+    "assets/images/buttonFairy.png"
   ]
 );
 g.start();
@@ -38,7 +38,7 @@ function setup() {
 
   //Create the fairy's animation frames using the `frames` method
   var fairyFrames = g.frames(
-    "images/buttonFairy.png", //The tileset image
+    "assets/images/buttonFairy.png", //The tileset image
     [[0,0],[48,0],[96,0]],    //The `x` and `y` positions of frames
     48, 32                    //The `width` and `height` of each frame
   );

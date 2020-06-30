@@ -3,7 +3,7 @@
 // Marbles
 
 
-/// <reference path="../ga.plugins.d.ts" />  
+/// <reference path="../../ga.plugins.d.ts" />  
 
 (function () {
 
@@ -21,7 +21,7 @@ This file requires these convenience functions from `plugins.js`:
 
 //Create a new GA instance, and start it.
 
-var g = ga(320, 320, setup, ["images/marbles.png"]);
+var g = ga(320, 320, setup, ["assets/images/marbles.png"]);
 g.start();
 
 //Declare global sprites, objects, and variables
@@ -82,7 +82,7 @@ function setup() {
     true, 0, 0,
     //A function that describes how to make each peg in the grid
     () => {
-      let frames = g.filmstrip("images/marbles.png", 32, 32)
+      let frames = g.filmstrip("assets/images/marbles.png", 32, 32)
       let marble:Marble = g.sprite(frames);
       marble.show(g.randomInt(0, 5));
       marble.circular = true;

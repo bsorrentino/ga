@@ -3,7 +3,7 @@
 // Texture atlas buttons
 
 
-/// <reference path="../ga.plugins.d.ts" />  
+/// <reference path="../../ga.plugins.d.ts" />  
 
 (function () {
 
@@ -12,8 +12,8 @@
 var g = ga(
   256, 256, setup, 
   [
-    "images/button2.json",
-    "fonts/puzzler.otf"
+    "assets/images/button2.json",
+    "assets/fonts/puzzler.otf"
   ]
 );
 g.start();

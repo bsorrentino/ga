@@ -15,9 +15,9 @@ This file requires these convenience functions from `plugins.js`:
 var g = ga(
   256, 256, setup, 
   [
-    "images/buttonFairy/0.png",
-    "images/buttonFairy/1.png",
-    "images/buttonFairy/2.png"
+    "assets/images/buttonFairy/0.png",
+    "assets/images/buttonFairy/1.png",
+    "assets/images/buttonFairy/2.png"
   ]
 );
 g.start();
@@ -50,9 +50,9 @@ function setup() {
 
   //You can make a sprite from an array of images, like this:
   fairy = g.sprite([
-    "images/buttonFairy/0.png",
-    "images/buttonFairy/1.png",
-    "images/buttonFairy/2.png"
+    "assets/images/buttonFairy/0.png",
+    "assets/images/buttonFairy/1.png",
+    "assets/images/buttonFairy/2.png"
   ]);
   
   //You can control the sprites using the same methods and properties

@@ -4,7 +4,7 @@
 
 
 
-/// <reference path="../ga.plugins.d.ts" />  
+/// <reference path="../../ga.plugins.d.ts" />  
 
 (function () {
 
@@ -14,7 +14,7 @@ Learn how to create a generic tank vehicle.
 
 //Create a new GA instance, and start it.
 
-let g = ga(256, 256, setup, ["fonts/puzzler.otf"]);
+let g = ga(256, 256, setup, ["assets/fonts/puzzler.otf"]);
 g.start();
 
 interface Tank extends GA.Group {

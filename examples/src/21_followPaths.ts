@@ -1,6 +1,6 @@
  // Tweening
 
-/// <reference path="../ga.plugins.d.ts" />  
+/// <reference path="../../ga.plugins.d.ts" />  
 
 (function () {
 
@@ -14,7 +14,7 @@ path between a series of connected waypoints.
 let g = ga(
   512, 600, setup, 
   [
-    "images/animals.json"
+    "assets/images/animals.json"
   ]
 );
 g.start();
