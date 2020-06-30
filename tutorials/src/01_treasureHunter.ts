@@ -1,4 +1,4 @@
-/// <reference path="../ga.d.ts" />
+/// <reference path="../../ga.d.ts" />
 //Create a new Ga instance, and start it.
 //Pre-load images in the array.
 
@@ -7,7 +7,7 @@
 var g = ga(
   512, 512, setup,
   [
-    "sounds/chimes.wav"
+    "assets/sounds/chimes.wav"
   ]
 );
 

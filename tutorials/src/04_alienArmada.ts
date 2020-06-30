@@ -1,4 +1,4 @@
-/// <reference path="../ga.plugins.d.ts" />
+/// <reference path="../../ga.plugins.d.ts" />
 
 //Create a new GA instance, and start it.
 //Pre-load the texture atlas and font in the array.
@@ -8,11 +8,11 @@
 var g = ga(
   480, 320, setup,
   [
-    "images/alienArmada.json",
-    "sounds/explosion.mp3",
-    "sounds/music.mp3",
-    "sounds/shoot.mp3",
-    "fonts/emulogic.ttf"
+    "assets/images/alienArmada.json",
+    "assets/sounds/explosion.mp3",
+    "assets/sounds/music.mp3",
+    "assets/sounds/shoot.mp3",
+    "assets/fonts/emulogic.ttf"
   ],
 
   //Set the optional `load` state which creates
@@ -93,12 +93,12 @@ function setup() {
 
   //Create the sounds.
   //Music.
-  music = g.sound("sounds/music.mp3");
+  music = g.sound("assets/sounds/music.mp3");
   music.play();
 
   //Shoot sound.
   //Create the sound.
-  shootSound = g.sound("sounds/shoot.mp3");
+  shootSound = g.sound("assets/sounds/shoot.mp3");
 
   //Pan the `shootSound` so that it's 75% in the left speaker.
   //Panning values range between -1 (left speaker) and 1 (right
@@ -108,7 +108,7 @@ function setup() {
 
   //Explosion sound.
   //Create the sound.
-  explosionSound = g.sound("sounds/explosion.mp3");
+  explosionSound = g.sound("assets/sounds/explosion.mp3");
 
   //Pan the `explosionSound` so that it's 75% in the right speaker.
   explosionSound.pan = 0.5;

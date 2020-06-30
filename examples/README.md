@@ -7,7 +7,7 @@ npx parcel build *.html
 
 ## prepare dependencies
 
-copy `assets` folder, `ga.js` and `plugins.js` to `./dist`
+copy `assets` and `lib` folder to `./dist`
 
 ## run samples
 ```

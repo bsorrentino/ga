@@ -1,4 +1,4 @@
-/// <reference path="../ga.plugins.d.ts" />
+/// <reference path="../../ga.plugins.d.ts" />
 
 (function () {
 
@@ -7,7 +7,7 @@
 var g = ga(
   910, 512, setupTitleScreen,
   [
-    "images/flappyFairy/flappyFairy.json"
+    "assets/images/flappyFairy/flappyFairy.json"
   ]
 );
 g.start();
@@ -20,16 +20,15 @@ g.start();
 //mode by pressing lowercase `x` (88) or uppercase `X` (120) on
 //the keyboard. If you leave these arguments out, the default `esc`
 //key will do the trick.
-g.enableFullscreen(88, 120);
+
+//g.enableFullscreen(88, 120);
 
 interface Fairy extends GA.Sprite {
   oldVy:number;
 }
 
 //Declare any variables shared between functions
-var pointer,
-    canvas,
-    fairy:Fairy,
+let fairy:Fairy,
     sky:GA.TilingSprite,
     blocks:GA.Group,
     title:GA.Sprite,
@@ -41,6 +40,7 @@ var pointer,
 //The `setup` function will run only once.
 //Use it for initialization tasks
 function setupTitleScreen() {
+  console.log( 'setupTitleScreen');
 
   //Make the sky background
   sky = g.tilingSprite(
@@ -55,25 +55,27 @@ function setupTitleScreen() {
   //Center the title
   g.stage.putCenter(title, 0, -70);
 
-  //Create the play button
   goButton = g.button([
     "up.png",
     "over.png",
     "down.png"
   ]);
 
-  //Center the play button
-  g.stage.putCenter(goButton, 0, 150);
-
-  //Make the play button's `press` action
-  //start the game when the button is pressed.
   goButton.release = () => {
+    console.log( 'release' )
     g.state = setupGame;
   };
 
+  goButton.tap = () => console.log( 'tab' )
+  //Make the play button's `press` action
+  //start the game when the button is pressed.
+
+  //Center the play button
+  g.stage.putCenter(goButton, 0, 150);
+
+
   //Start the `playTitleScreen` state.
   g.state = playTitleScreen;
-
 }
 
 function playTitleScreen() {

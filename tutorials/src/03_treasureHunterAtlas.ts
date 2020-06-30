@@ -1,18 +1,15 @@
-/// <reference path="../ga.d.ts" />
+/// <reference path="../../ga.d.ts" />
 
 (function () {
+
 
 //Create a new GA instance, and start it.
 //Pre-load images in the array.
 var g = ga(
   512, 512, setup,
   [
-    "images/explorer.png",
-    "images/dungeon.png",
-    "images/blob.png",
-    "images/treasure.png",
-    "images/door.png",
-    "sounds/chimes.wav"
+    "assets/images/treasureHunter.json",
+    "assets/sounds/chimes.wav"
   ]
 );
 g.start();
@@ -25,11 +22,11 @@ interface HealthBar extends GA.Group {
   inner:GA.Rectangle;
 }
 
-//Declare your global variables (global to this game)
+//Decelare your global variables (global to this game)
 var dungeon:GA.DisplayableObject,
     player:GA.DisplayableObject,
     treasure:Treasure,
-    enemies:Array<GA.DisplayableObject>,
+    enemies:Array<GA.Sprite>,
     chimes:GA.Sound,
     exit:GA.DisplayableObject,
     healthBar:HealthBar,
@@ -47,30 +44,26 @@ function setup() {
   g.backgroundColor = "white";
 
   //Create the `chimes` sound object
-  chimes = g.sound("sounds/chimes.wav");
+  chimes = g.sound("assets/sounds/chimes.wav");
 
   //The dungeon background
-  dungeon = g.sprite("images/dungeon.png");
+  dungeon = g.sprite("dungeon.png");
 
   //The exit door
-  exit = g.sprite("images/door.png");
+  exit = g.sprite("door.png");
   exit.x = 32;
 
   //The player sprite
-  player = g.sprite("images/explorer.png");
+  player = g.sprite("explorer.png");
   player.x = 68;
   player.y = g.canvas.height / 2 - player.halfWidth;
 
   //Create the treasure
-  treasure = g.sprite("images/treasure.png");
+  treasure = g.sprite("treasure.png");
 
   //Position it next to the left edge of the canvas
   treasure.x = g.canvas.width - treasure.width - 32;
   treasure.y = g.canvas.height / 2 - treasure.halfHeight;
-
-  //Alternatively, you could use Ga's built in convience method
-  //called `putCenter` to postion the sprite like this:
-  //g.stage.putCenter(treasure, 208, 0);
 
   //Create a `pickedUp` property on the treasure to help us Figure
   //out whether or not the treasure has been picked up by the player
@@ -92,7 +85,7 @@ function setup() {
   for (var i = 0; i < numberOfEnemies; i++) {
 
     //Each enemy is a red rectangle
-    var enemy = g.sprite("images/blob.png");
+    var enemy = g.sprite("blob.png");
 
     //Space each enemy horizontally according to the `spacing` value.
     //`xOffset` determines the point from the left of the screen
