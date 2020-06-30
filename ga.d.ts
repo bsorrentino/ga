@@ -443,6 +443,10 @@ interface Engine {
      */
     button(source:Array<string>|string|Frame|Frames):Sprite ;
 
+    /**
+     * disable the blur effect
+     */
+    noBlurScale():void;
 }
 
 } // end namespace GA

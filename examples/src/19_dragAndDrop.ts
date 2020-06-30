@@ -3,7 +3,7 @@
 // Drag and drop
 
 
-/// <reference path="../ga.d.ts" />  
+// <reference path="../../ga.d.ts" />  
 
 (function () {
 

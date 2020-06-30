@@ -2,3 +2,5 @@
 /node_modules/
 *.min.js
 *.map
+.cache/
+dist/

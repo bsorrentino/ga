@@ -1,4 +1,4 @@
-/// <reference path="../ga.plugins.d.ts" />
+/// <reference path="../../ga.plugins.d.ts" />
 
 (function () {
   

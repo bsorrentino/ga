@@ -1,4 +1,4 @@
-/// <reference path="../ga.plugins.d.ts" />
+/// <reference path="../../ga.plugins.d.ts" />
 
 (function () {
 
@@ -18,11 +18,11 @@ This file requires these convenience functions from `plugins.js`:
 var g = ga(
   256, 256, setup,
   [
-    "images/platforms.png",
-    "images/rocket.png",
-    "fonts/puzzler.otf",
-    "fonts/PetMe64.ttf",
-    "images/animals.json"
+    "assets/images/platforms.png",
+    "assets/images/rocket.png",
+    "assets/fonts/puzzler.otf",
+    "assets/fonts/PetMe64.ttf",
+    "assets/images/animals.json"
   ]
 );
 g.start();
